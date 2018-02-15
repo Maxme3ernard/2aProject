@@ -7,15 +7,10 @@ import java.awt.*;
 public class Fenetre extends JFrame {
     int[][] terrain;
     int blockSize;
-    boolean setup;
 
-
-    //s: la taille des block
-    public Fenetre(int s){
-        super("Worm fighterZ");
-        setup=false;
-        blockSize=s;
-        int[][] t={{0,0,0,0,0,0,0,0,0,0},
+    public Fenetre(int s /*int[][] t*/){
+        super("Worm FighterZ");
+        int[][] t={{0,0,0,0,0,0,0,0,0,0}, //amené à disparaitre quand la génération du terrain sera automatique
                 {0,0,0,0,0,1,1,0,0,0},
                 {0,0,0,0,0,1,1,1,1,0},
                 {0,0,0,0,1,1,1,1,1,1},
@@ -23,29 +18,12 @@ public class Fenetre extends JFrame {
                 {2,2,2,1,1,1,1,1,1,1},
                 {2,2,2,1,1,1,1,1,1,1}};
         terrain=t;
-        //setSize(1000,1000);
-        setSize(t[0].length*blockSize,t.length*blockSize);
-        System.out.println(this.getWidth());
-        System.out.println(this.getWidth());
-        setResizable(false);
+        blockSize=s;
+        setSize((t[0].length+1)*blockSize,(t.length+2)*blockSize);
         setLocation(10,10);
-        repaint();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
+        JPanelFenetre f=new JPanelFenetre(blockSize, terrain);
+        this.setContentPane(f);
+        setVisible(true);
     }
-
-    public void paint(Graphics g){
-        if(!setup){
-            for(int i=0;i<terrain.length;i++){
-                for(int j=0;j<terrain[0].length;j++){
-                    if(terrain[i][j]==0) g.setColor(Color.cyan);
-                    if(terrain[i][j]==1) g.setColor(Color.gray);
-                    if(terrain[i][j]==2) g.setColor(Color.blue);
-                    g.fillRect(blockSize*j,blockSize*i,blockSize,blockSize);
-                }
-            }
-            setup=true;
-        }
-    }
-
 }
