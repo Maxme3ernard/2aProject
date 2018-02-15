@@ -21,9 +21,10 @@ public class Fenetre extends JFrame {
         blockSize=s;
         setSize((t[0].length+1)*blockSize,(t.length+2)*blockSize);
         setLocation(10,10);
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanelFenetre f=new JPanelFenetre(blockSize, terrain);
-        this.setContentPane(f);
+        setContentPane(f);
         setVisible(true);
     }
 }
