@@ -32,15 +32,16 @@ public class Fenetre extends JFrame {
     public void genererTerrain(int x, int y){
         int[][] t=new int[y][x];
         int p=(int) y/2;
-        int r=0;
+        int r=0; //modification denivelé
+        double montagnes=2.2; //coefficient montagnes
+        double plaine=2.5; //coefficient plaines
         int oldp=p;
         for(int i=0;i<t[0].length;i++){
-            if((int)(Math.random()*2)==1){
+            if((Math.random()*montagnes)>1&&p!=oldp){
                 r=(p-oldp)+(int)(Math.random()*2-1);
-                System.out.println(r);
             }
             else{
-                r=(int)((Math.random()*2.5-Math.random()*2.5));
+                r=(int)((Math.random()*plaine-Math.random()*plaine));
             }
             oldp=p;
             if(p>y-24) p-=Math.abs(r);
