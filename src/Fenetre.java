@@ -10,7 +10,7 @@ public class Fenetre extends JFrame {
 
     public Fenetre(int s /*int[][] t*/){
         super("Worm FighterZ");
-        genererTerrain(100,50);
+        genererTerrain(200,100);
         /* int[][] t={{0,0,0,0,0,0,0,0,0,0}, //amené à disparaitre quand la génération du terrain sera automatique
                 {0,0,0,0,0,1,1,0,0,0},
                 {0,0,0,0,0,1,1,1,1,0},
@@ -32,15 +32,21 @@ public class Fenetre extends JFrame {
     public void genererTerrain(int x, int y){
         int[][] t=new int[y][x];
         int p=(int) y/2;
-        int r;
+        int r=0;
+        int oldp=p;
         for(int i=0;i<t[0].length;i++){
-            r=(int)((Math.random()*4-Math.random()*4));
-            System.out.println(r);
-            if(p>y-10) p-=Math.abs(r);
-            if(p<10) p+=Math.abs(r);
+            if((int)(Math.random()*2)==1){
+                r=(p-oldp)+(int)(Math.random()*2-1);
+                System.out.println(r);
+            }
+            else{
+                r=(int)((Math.random()*2.5-Math.random()*2.5));
+            }
+            oldp=p;
+            if(p>y-24) p-=Math.abs(r);
+            if(p<24) p+=Math.abs(r);
             else p+=r;
             if(p<t.length && p>0){
-                System.out.println(p+"   "+i);
                 t[p][i]=1;
                 for(int j=p;j<t.length;j++){
                     t[j][i]=1;
