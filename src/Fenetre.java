@@ -3,14 +3,18 @@
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Fenetre extends JFrame {
+public class Fenetre extends JFrame{
     int[][] terrain;
     int blockSize;
 
     public Fenetre(int s /*int[][] t*/){
         super("Worm FighterZ");
-        genererTerrain(200,100);
+        genererTerrain(190,100);
         /* int[][] t={{0,0,0,0,0,0,0,0,0,0}, //amené à disparaitre quand la génération du terrain sera automatique
                 {0,0,0,0,0,1,1,0,0,0},
                 {0,0,0,0,0,1,1,1,1,0},
@@ -20,11 +24,12 @@ public class Fenetre extends JFrame {
                 {2,2,2,1,1,1,1,1,1,1}};
         terrain=t;*/
         blockSize=s;
-        setSize((terrain[0].length+1)*blockSize,(terrain.length+2)*blockSize);
+        setSize((terrain[0].length)*blockSize,(terrain.length+2)*blockSize);
+        //Pourquoi un +1 ?
         setLocation(10,10);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        JPanelFenetre f=new JPanelFenetre(blockSize, terrain);
+        JPanelFenetre f = new JPanelFenetre(blockSize, terrain,this);
         setContentPane(f);
         setVisible(true);
     }
@@ -56,4 +61,6 @@ public class Fenetre extends JFrame {
         }
         terrain=t;
     }
+
 }
+
