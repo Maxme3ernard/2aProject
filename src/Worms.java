@@ -19,6 +19,7 @@ public class Worms {
     protected final static int hitBoxLargeur = 30;
     protected final static int blocIntraversables[] = {1};
     protected final static double facteurEchelle = 0.05;
+    protected final static int climbAbility = 2; //Nombre de bloc que le Worms est capable d'escalader
 
     public Worms(int t, String n,int[][] terrain,int blockSize,boolean[] changementPrint,int x,int y){ //t=0 ou 1, pour savoir quelle équipe
         if(t==0) couleur=Color.blue;
@@ -73,15 +74,15 @@ public class Worms {
             int yGrilleBasWorms = BlocBasWorms.y;
             boolean sameYforAll = true;
             for(Block bContact:BlockEnContact){
-                if(bContact.y != yGrilleBasWorms){
+                if(bContact.y > yGrilleBasWorms + climbAbility -1){
                     sameYforAll = false;
                 }
-                if(sameYforAll){
-                    tempy -= blockSize;
-                    x = tempx;
-                    y = tempy;
-                    changementPrint[0] = true;
-                }
+            }
+            if(sameYforAll){
+                tempy -= blockSize;
+                x = tempx;
+                y = tempy;
+                changementPrint[0] = true;
             }
         }
 
@@ -116,6 +117,7 @@ public class Worms {
             }
             if(surLeSol){
                 ytemp = yGrilleBasWorms*blockSize;
+                vitesse = 0;
             }
             if(ytemp != y){
                 y = ytemp;

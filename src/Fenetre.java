@@ -14,7 +14,7 @@ public class Fenetre extends JFrame{
 
     public Fenetre(int s /*int[][] t*/){
         super("Worm FighterZ");
-        genererTerrain(190,100);
+        genererTerrain(2*190,2*100);
         /* int[][] t={{0,0,0,0,0,0,0,0,0,0}, //amené à disparaitre quand la génération du terrain sera automatique
                 {0,0,0,0,0,1,1,0,0,0},
                 {0,0,0,0,0,1,1,1,1,0},
