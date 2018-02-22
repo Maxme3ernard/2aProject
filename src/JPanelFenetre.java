@@ -64,7 +64,7 @@ public class JPanelFenetre extends JPanel implements ActionListener,KeyListener 
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==mt){
             for(Worms wor: joueurs){
-                wor.applyGravity();
+                wor.applyForces();
             }
             if(changementPrint[0]==true){
                 repaint();
@@ -82,6 +82,16 @@ public class JPanelFenetre extends JPanel implements ActionListener,KeyListener 
                     }
                     else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
                         wor.deplacer(1);
+                        antiRepeatTime = System.currentTimeMillis();
+                    }
+                    else if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                        if(wor.get_orientation()==0){
+                            wor.set_vitesse_x(-5);
+                        }
+                        else{
+                            wor.set_vitesse_x(5);
+                        }
+                        wor.set_vitesse_y(5);
                         antiRepeatTime = System.currentTimeMillis();
                     }
                 }
