@@ -1,10 +1,8 @@
-import org.newdawn.slick.SlickException;
-
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Worms {
-    protected org.newdawn.slick.Color couleur;
+    protected Color couleur;
     protected String name;
     protected int life;
     protected int x; //Les coordonnées x,y correspondent au coin en bas à gauche du Worms
@@ -23,16 +21,14 @@ public class Worms {
     protected final static double masse = 10;
     protected final static double g = 9.81;
     protected final static int hitBoxHauteur = 40;
-    protected final static int hitBoxLargeur = 20;
+    protected final static int hitBoxLargeur = 30;
     protected final static int blocIntraversables[] = {1};
     protected final static double facteurEchelle = 0.05;
     protected final static int climbAbility = 2; //Nombre de bloc que le Worms est capable d'escalader
-    protected org.newdawn.slick.Image skinLeft;
-    protected org.newdawn.slick.Image skinRight;
 
-    public Worms(int t, String n,int[][] terrain,int blockSize,boolean[] changementPrint,int x,int y) throws SlickException { //t=0 ou 1, pour savoir quelle équipe
-        if(t==0) couleur=org.newdawn.slick.Color.blue;
-        else couleur=org.newdawn.slick.Color.red;
+    public Worms(int t, String n,int[][] terrain,int blockSize,boolean[] changementPrint,int x,int y){ //t=0 ou 1, pour savoir quelle équipe
+        if(t==0) couleur=Color.blue;
+        else couleur=Color.red;
         name=n;
         life=200;
         this.terrain = terrain;
@@ -49,8 +45,6 @@ public class Worms {
         //speed_force_x = 0;
         //speed_force_y = 0;
         //générateur aléatoire position
-        skinLeft = new org.newdawn.slick.Image("images/skin_worms_left.png");
-        skinRight = new org.newdawn.slick.Image("images/skin_worms_right.png");
     }
 
     public void modifierVie(int hp){
@@ -204,16 +198,9 @@ public class Worms {
         isMoving = etat;
     }
 
-    public void draw(org.newdawn.slick.Graphics g){
-        //g.setColor(couleur);
-        //g.fillRect(x,y-hitBoxHauteur+1,hitBoxLargeur,hitBoxHauteur);
-
-        if(orientation==0){
-            skinLeft.draw(x,y-hitBoxHauteur+1);
-        }
-        else{
-            skinRight.draw(x,y-hitBoxHauteur+1);
-        }
+    public void draw(Graphics g){
+        g.setColor(couleur);
+        g.fillRect(x,y-hitBoxHauteur+1,hitBoxLargeur,hitBoxHauteur);
 
         //Debugage:
         /*ArrayList<Block> BlockEnContact = getContactBlock(x,y+1);
